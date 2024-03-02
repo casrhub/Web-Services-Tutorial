@@ -27,7 +27,7 @@ const requestOptions = {
 
   function myFunction() {
     const songName = document.getElementById('songName').value; // Get the song name from the input
-    const tokenspo = process.env.TOKEN; // Replace this with your actual Spotify token
+    const tokenspo = 'BQAq7rb_oCA_Cr8-Yz0s1Q-cEo3KSH7GUhF_0d2Mz8x-zXB1aAhgu4DdNafFELVFAo1e9fHdQfnLHw9mYJumfhu2P7JfpUZN5pTztGkHUUHA3lINopg'; // Replace this with your actual Spotify token
 
     const requestOptions_2 = {
         method: 'GET',
