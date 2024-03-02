@@ -1,5 +1,7 @@
-const client_id = " ";
-const client_secret = " ";
+require("dotenv").config({path: '../.env'});
+
+const client_id = process.env.CLIENT_ID;
+const client_secret = process.env.CLIENT_SECRET;
 const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -14,66 +16,43 @@ const requestOptions = {
         const response = await fetch(endpoint_spotify, requestOptions);
         const data = await response.json()
         const tokenspo = data.access_token;
-        console.log(tokenspo)
-        console.log(data)
-
-        myFunction("Stair way to heaven", tokenspo)
-        //document.addEventListener('DOMContentLoaded', function() {
-        //    // Wait for the DOM content to load before adding event listener
-        //    document.getElementById('songForm').addEventListener('submit', function(event) {
-        //        // Prevent the default form submission behavior
-        //        event.preventDefault();
-        //        
-        //        // Get the value entered by the user in the input field
-        //        var songName = document.getElementById('songName').value;
-        //        
-        //        // Call your JavaScript function and pass the songName value
-        //        myFunction(songName, tokenspo);
-        //
-        //        document.getElementById('songName').value = '';
-        //    });
-        //});
-
-        function myFunction(songName, tokenspo){
-            const requestOptions_2 = {
-                method: 'GET',
-                headers: {'Authorization': 'Bearer ' + tokenspo}
-            }
-
-                const endpoint_spotify_2 = "https://api.spotify.com/v1/search?q="+songName+"&type=track";
-
-                (async ()=> {
-                try{
-                    const response = await fetch(endpoint_spotify_2, requestOptions_2);
-                    const data = await response.json()
-                    console.log("-------------------------------------------------------------------------")
-                    console.log(data)
-                    
-                    //const tokenspo = data.access_token;
-                }catch (error) {
-                    console.log( 'Error anidate function: ', error)
-                }
-
-
-                })();
-
-
-        };
-
-
-
-
-
-
-
-
-
-
+        //console.log(tokenspo)
+        //console.log(data)
 
         
 
-            
+
+        function myFunction() {
+            const songName = document.getElementById('songName').value; // Get the song name from the input
+            const tokenspo = 'YOUR_SPOTIFY_TOKEN_HERE'; // Replace this with your actual Spotify token
+        
+            const requestOptions_2 = {
+                method: 'GET',
+                headers: {'Authorization': 'Bearer ' + tokenspo}
+            };
+        
+            const endpoint_spotify_2 = `https://api.spotify.com/v1/search?q=${encodeURIComponent(songName)}&type=track`;
+        
+            (async () => {
+                try {
+                    const response = await fetch(endpoint_spotify_2, requestOptions_2);
+                    const data = await response.json();
+                    const artistName = data.tracks.items[0].artists[0].name;
+        
+                    // Display the artist name instead of console logging
+                    document.getElementById('artistNameDisplay').innerText = "Artist Name: " + artistName;
+                } catch (error) {
+                    console.error('Error in function: ', error);
+                    document.getElementById('artistNameDisplay').innerText = 'Error fetching artist name.';
+                }
+            })();
+        }
+
     } catch (error) {
         console.log( 'Error: ', error)
     }
   })();
+
+// Create a text input in html 
+// send that input and use it as a paramter in my function in js
+// return artist name from js 
