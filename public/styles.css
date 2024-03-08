@@ -4,3 +4,35 @@
     margin-right: auto;
     width: 80%; /* Adjust this value to set the image size */
 }
+
+pre {
+    background-color: #f4f4f4;
+    border-left: 3px green; /* Materialize red lighten-2 */
+    overflow: auto;
+    padding: 3px;
+    font-family: Consolas, "Courier New", monospace;
+}
+code {
+    color:darkgreen
+    
+}
+
+.center-container {
+    display: flex; /* This makes the div a flex container */
+    justify-content: center; /* This centers the children horizontally */
+    align-items: center; /* This centers the children vertically */
+    min-height: 100vh; /* This makes the div at least as tall as the viewport */
+    flex-direction: column; /* This stacks the child elements vertically */
+}
+
+/* Additional styles to ensure the content is centered and looks good */
+.center-align {
+    text-align: center; /* Centers the text inside elements with this class */
+}
+
+
+.center-nav-items {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
