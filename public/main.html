@@ -21,15 +21,16 @@
 
 <body class="lime lighten-4">
     <!-- Navigation Bar -->
-    <nav class="nav-wrapper green lighten-2">
-        <div class="container">
-            <ul id="nav-mobile" class="left hide-on-med-and-down">
-                <li><a href="#">Node Tutorial</a></li>
+    <div class="navbar-fixed ">
+        <nav class="blue-grey darken-3 lime darken-4">
+            <ul class="center-nav-items">
+                <li><a href="/public/index.html">Home</a></li>
+                <li><a href="/public/main.html">Node Tutorial</a></li>
                 <li><a href="#">What is an API?</a></li>
                 <li><a href="#">What is NodeJS</a></li>
             </ul>
-        </div>
-    </nav>
+        </nav>
+      </div>
 
     <!-- Main Tutorial Introduction -->
     <div class="container">
@@ -47,7 +48,7 @@
 
         <!-- Detailed Tutorial Sections -->
         <!-- Part 1 -->
-        <div class="section card-panel light-green lighten-2">
+        <div class="section card-panel light-green lighten-2 hoverable">
             <h3>Part 1: Introduction to Web Services and Node.js</h3>
             <p>This section will introduce web services and their importance in modern web development. We'll also dive into Node.js fundamentals, including its event-driven architecture and non-blocking I/O features.</p>
             <h5>What is Node.js?</h5>
@@ -72,6 +73,9 @@
               </p>
               <h5>HTTP methods</h5>
               
+             
+            
+              
               <p>
                 <strong>GET Method:</strong> Imagine you're at a restaurant and you ask the waiter for the menu. The waiter (API) brings the menu to you (the client) from the kitchen (the server). This is like a <code>GET</code> request, where you're requesting to see information. In web terms, it's used to retrieve data from a server at the specified resource. 
               </p>
@@ -85,17 +89,15 @@
               <iframe width="560" height="315" src="https://www.youtube.com/embed/-MTSQjw5DrM?si=5EZ6ol0pfNDrKEQy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="centered-image"></iframe>
               
 
-
-              
-            
-
-
         </div>
 
         <!-- Part 2 -->
-        <div class="section">
+        <div class="section card-panel light-green lighten-2" >
             <h5>Part 2: Consuming Web Services Using Node.js</h5>
             <p>In the second part, we'll cover how to use Node.js to make requests to web services. We'll focus on using npm packages like axios or node-fetch to interact with APIs, handle responses, and process JSON data.</p>
+            <p>Okay then, by far you should have a notion of what is an api, what is node js and what are http methods, now its time to put this into practice</p>
+
+            
         </div>
 
         <!-- Part 3 -->
@@ -110,3 +112,4 @@
 </body>
 
 </html>
+
