@@ -1,45 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <!--Import Google Icon Font-->
-     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-     <!-- Compiled and minified CSS --> <!--Now we can use css styles from materilize -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Import Google Icon Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS from Materialize -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-     <!-- Compiled and minified JavaScript --> <!-- Interactive components -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Compiled and minified JavaScript from Materialize -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <!-- Link to your custom CSS file -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
 
     <title>Main Tutorial</title>
 </head>
-<nav class="nav-wrapper green lighten-2 ">
-    <ul>
-        <li><a href="#">Node Tutorial</a></li>
-        <li><a href="#">What is an API?</a></li>
-        <li><a href="#">What is NodeJS</a></li>
 
-    </ul>
+<body class="lime lighten-4">
+    <!-- Navigation Bar -->
+    <nav class="nav-wrapper green lighten-2">
+        <div class="container">
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li><a href="#">Node Tutorial</a></li>
+                <li><a href="#">What is an API?</a></li>
+                <li><a href="#">What is NodeJS</a></li>
+            </ul>
+        </div>
+    </nav>
 
-</nav>
-<body>
-    <div class="card-panel green darken-3">
-        <h4>
-        Introduction
-        <i class="material-icons green-text">javascript</i>
-    </h4>
-    <p class="white-text">In this tutorial, we will learn how to consume web services through Node.js. 
-        We will divide this tutorial into three parts, along with a practical example that ties all the concepts together. 
-        Here's a brief overview of what each part will entail:
+    <!-- Main Tutorial Introduction -->
+    <div class="container">
+        <div class="card-panel green darken-3 z-depth-2">
+            <h4 class="white-text">
+                Introduction
+                <i class="material-icons right white-text">lightbulb_outline</i>
+            </h4>
+            <p class="white-text">
+                In this tutorial, we will explore how to consume web services through Node.js. This guide is divided into three comprehensive parts, alongside a practical example that integrates all the concepts discussed. The structure of each of the parts
+                consists in a concise and brief explanation, followed by an example with our node js application in which we are using 3 apis: OpenAi, Spotify and a news api. 
+            </p>
+           
+        </div>
 
-    </p>
+        <!-- Detailed Tutorial Sections -->
+        <!-- Part 1 -->
+        <div class="section card-panel light-green lighten-2">
+            <h3>Part 1: Introduction to Web Services and Node.js</h3>
+            <p>This section will introduce web services and their importance in modern web development. We'll also dive into Node.js fundamentals, including its event-driven architecture and non-blocking I/O features.</p>
+            <h5>What is Node.js?</h5>
+            <ul>
+                <li>Node.js is a server environment</li>
+                  <li>Node.js uses JavaScript outside the browser, in other words it uses JavaScript in the server side</li>
+                  <li>Node.js enables us to use JavaScript in both client side and server side</li>
+                </ul>
+            <h5>What is an API?</h5>
+            <ul>
+                <li>API stands for Application Programming Interface.</li>
+                <li>It is a set of rules that allows programs to communicate with each other.</li>
+                <li>APIs define methods of requesting services from an application or software component.</li>
+                <li>They enable integration between different software systems, often over a network.</li>
+                <li>APIs can be used to access web-based services, databases, or other resources.</li>
+                <li>They provide a layer of security, hiding the details of database or service internals.</li>
+                <li>Commonly used in building RESTful web services and applications.</li>
+              </ul>
+              <img src="img/mesero.png" class="centered-image">
+              <p>
+                We can imagine a waiter an api whom manages the requests that we (clients) make and make a request on the chef (server)
+                finally the waiter delivers our food, we can eat like animals and we dont really know how tjis food was made. 
+            </p>
+              
+            
+
+
+        </div>
+
+        <!-- Part 2 -->
+        <div class="section">
+            <h5>Part 2: Consuming Web Services Using Node.js</h5>
+            <p>In the second part, we'll cover how to use Node.js to make requests to web services. We'll focus on using npm packages like axios or node-fetch to interact with APIs, handle responses, and process JSON data.</p>
+        </div>
+
+        <!-- Part 3 -->
+        <div class="section">
+            <h5>Part 3: Advanced Integration and Real-world Application</h5>
+            <p>The final part will walk through a practical example that demonstrates how to integrate multiple web services to build a cohesive application. This section aims to solidify your understanding by applying the concepts in a real-world scenario.</p>
+        </div>
     </div>
-    
-    <h4>What is an API?</h4>
 
-    
+    <!-- Compiled and minified JavaScript at the end of the body for optimized loading -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
+
 </html>
