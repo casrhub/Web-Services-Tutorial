@@ -16,6 +16,10 @@
     <!-- Link to your custom CSS file -->
     <link rel="stylesheet" type="text/css" href="styles.css">
 
+    <!-- Link to import highlight css format of code boxes -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet" />
+
+
     <title>Main Tutorial</title>
 </head>
 
@@ -51,21 +55,21 @@
         <div class="section card-panel light-green lighten-2 hoverable">
             <h3>Part 1: Introduction to Web Services and Node.js</h3>
             <p>This section will introduce web services and their importance in modern web development. We'll also dive into Node.js fundamentals, including its event-driven architecture and non-blocking I/O features.</p>
-            <h5>What is Node.js?</h5>
+            <h5><i class="tiny material-icons">chevron_right</i>What is Node.js?</h5>
             <ul>
-                <li>Node.js is a server environment</li>
-                  <li>Node.js uses JavaScript outside the browser, in other words it uses JavaScript in the server side</li>
-                  <li>Node.js enables us to use JavaScript in both client side and server side</li>
+                  <li><i class="tiny material-icons">check_circle</i>Node.js is a server environment</li>
+                  <li><i class="tiny material-icons">check_circle</i>Node.js uses JavaScript outside the browser, in other words it uses JavaScript in the server side</li>
+                  <li><i class="tiny material-icons">check_circle</i>Node.js enables us to use JavaScript in both client side and server side</li>
                 </ul>
-            <h5>What is an API?</h5>
+            <h5><i class="tiny material-icons">chevron_right</i>What is an API?</h5>
             <ul>
-                <li>API stands for Application Programming Interface.</li>
-                <li>It is a set of rules that allows programs to communicate with each other.</li>
-                <li>APIs define methods of requesting services from an application or software component.</li>
-                <li>They enable integration between different software systems, often over a network.</li>
-                <li>APIs can be used to access web-based services, databases, or other resources.</li>
-                <li>They provide a layer of security, hiding the details of database or service internals.</li>
-                <li>Commonly used in building RESTful web services and applications.</li>
+                <li><i class="tiny material-icons">check_circle</i>API stands for Application Programming Interface.</li>
+                <li><i class="tiny material-icons">check_circle</i>It is a set of rules that allows programs to communicate with each other.</li>
+                <li><i class="tiny material-icons">check_circle</i>APIs define methods of requesting services from an application or software component.</li>
+                <li><i class="tiny material-icons">check_circle</i>They enable integration between different software systems, often over a network.</li>
+                <li><i class="tiny material-icons">check_circle</i>APIs can be used to access web-based services, databases, or other resources.</li>
+                <li><i class="tiny material-icons">check_circle</i>They provide a layer of security, hiding the details of database or service internals.</li>
+                <li><i class="tiny material-icons">check_circle</i>Commonly used in building RESTful web services and applications.</li>
               </ul>
               <img src="img/mesero.png" class="centered-image">
               <p>
@@ -93,22 +97,177 @@
 
         <!-- Part 2 -->
         <div class="section card-panel light-green lighten-2" >
-            <h5>Part 2: Consuming Web Services Using Node.js</h5>
+            <h3>Part 2: Consuming Web Services Using Node.js</h3>
             <p>In the second part, we'll cover how to use Node.js to make requests to web services. We'll focus on using npm packages like axios or node-fetch to interact with APIs, handle responses, and process JSON data.</p>
             <p>Okay then, by far you should have a notion of what is an api, what is node js and what are http methods, now its time to put this into practice</p>
+            <h4>Step by step:</h4>
+            <h5><i class="tiny material-icons">beenhere</i>Step 1: Intro </h5>
+            <p>In first place we need to consider or think about which API's we want to use depending in what we want to do. In this case we want to do a philosofic reflection about any song and we want to display the news articles about the artist who performed the same song. For this reason we are going to use Spotify API along Open AI API and as third use of API's we are going to use ------------------- .</p>
+            <h5><i class="tiny material-icons">beenhere</i>Step 2: Intro </h5>
+            <p>Once we have determined our objectives with the APIs and identified which ones we will utilize, we can appropriately commence with the tutorial on consuming web services using Node.js.</p>
+            <h5><i class="tiny material-icons">beenhere</i>Step 3: Generating a spotify token.  </h5>
+            <p>The first API we will start using is the spotify API. This one because in order to achieve our goals we need to have in first place the spotify token for make querys to spotify and with this get song and artits information for the philosophical reflection.</p>
+            <p>So, we can see this request of the token in the following code:</p>
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Generating token script</span>
+                <pre><code class="language-javascript">
+                  async function getSpotifyToken() {
+                    const requestOptions = {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: `grant_type=client_credentials&client_id=${client_id}&client_secret=${client_secret}`
+                    };
+                    const response = await fetch(endpoint_spotify, requestOptions);
+                    const data = await response.json();
+                    return data.access_token;
+                }
+                </code></pre>
+              </div>
+            </div>
+            <h5><i class="tiny material-icons">beenhere</i>Step 4: Making our first query to spotify API.</h5>
+            <p>Once we obtain the Spotify token, we will execute two queries. The first query will return the name of the song and the artist who performed it and the second one will return only the name of the artist, this because we need this data separate for futures implementations. This data will then be utilized to enable in-depth analysis with OpenAI and for get news about the artist who performed this song.</p>
+            <p>The code utilizing the Spotify token to execute the query can be observed in the subsequent code box:</p>
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Spotify query script</span>
+                <pre><code class="language-javascript">
+                  //Async Function for do spotify querys about the song and artist name.
+                  async function searchSpotifySong(token, songName) {
+                    const requestOptions = {
+                        method: 'GET',
+                        headers: { 'Authorization': 'Bearer ' + token }
+                    };
+                    const query = encodeURIComponent(songName);
+                    const endpoint = `https://api.spotify.com/v1/search?q=${query}&type=track`;
+                    const response = await fetch(endpoint, requestOptions);
+                    const data = await response.json();
+                    if (data.tracks.items.length > 0) {
+                        const artist_name = data.tracks.items[0].artists[0].name
+                        const song_name = data.tracks.items[0].name
+                        console.log("Song name and artist grabbed from Spotify: ")
+                        return `${song_name} by ${artist_name} \n`
+                        
+                    }
+                    throw new Error('Song not found');
+                  }
+
+                  //Async Function for do spotify querys about the artist name.
+                  async function getArtistName (token, songName) {
+                    const requestOptions = {
+                        method: 'GET',
+                        headers: { 'Authorization': 'Bearer ' + token }
+                    };
+                    const query = encodeURIComponent(songName);
+                    const endpoint = `https://api.spotify.com/v1/search?q=${query}&type=track`;
+                    const response = await fetch(endpoint, requestOptions);
+                    const data = await response.json();
+                    if (data.tracks.items.length > 0) {
+                        const artist_name = data.tracks.items[0].artists[0].name
+                        return artist_name
+                        
+                    }
+                    throw new Error('Song not found');
+                
+                }
+                </code></pre>
+              </div>
+            </div>
+            
+            <h5><i class="tiny material-icons">beenhere</i>Step 5: Making our first Open AI query</h5>
+            <p>With the song name and the artist name that we got of the las step, now we can do our first query to Open AI API for achieve the purpose we mentioned before.</p>
+            <p>We can see the request of the deep reflection and the request for the news about the song in the following Async functions:</p>
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Open AI query script</span>
+                <pre><code class="language-javascript">
+                  //Async Function for do Open AI querys about deep reflection.
+                  async function getOpenAIReflection(song_name_and_artist) {
+                    const body = JSON.stringify({
+                        model: 'gpt-3.5-turbo',
+                        messages: [{ "role": "user", "content": `Give me a deep philosophical reflection about ${song_name_and_artist}.` }]
+                    });
+                    const requestOptions = {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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' },
+                        body: body
+                    };
+                    const response = await fetch(endpoint_ai, requestOptions);
+                    const data = await response.json();
+                    console.log("Philosophical Reflection generated by gpt-3.5-turbo: ")
+                    return data.choices[0].message.content;
+                }
+                //Async Function for do Open AI querys about news articles of the artist.
+                async function fetchNewsArticlesAboutSong(songInfoNews) {
+                    const apikey = 'Put here your Open AI key';
+                    const encodedSongInfo = encodeURIComponent(songInfoNews); // Ensure the song info is URL-safe
+                    const url = `https://gnews.io/api/v4/search?q=${encodedSongInfo}&lang=en&country=us&max=10&apikey=${apikey}`;
+                
+                    try {
+                        const response = await fetch(url);
+                        const data = await response.json();
+                        const articles = data.articles;
+                
+                        console.log(`News Related to "${songInfoNews}":`);
+                        
+                
+                        for (let i = 0; i < articles.length; i++) {
+                            console.log(`New ${i}: ${articles[i]['title']}`);
+                            console.log(`Description: ${articles[i]['description']}`);
+                            console.log("\n");
+                            // To display all articles, remove the break statement below.
+                            break;
+                
+                        }
+                    
+                    } catch (error) {
+                        console.log('Error fetching news articles:', error);
+                    }
+                }
+                </code></pre>
+              </div>
+            </div>
+
+            <h5><i class="tiny material-icons">beenhere</i>Step 6: Making an Async function for call the before functions and display the results</h5>
+            <p>In this final step, we will execute an asynchronous function that calls all previously mentioned asynchronous functions and establishes a relationship between them. This connection will enable the 'deep reflection' and 'news articles' functions to fulfill their intended purposes. In other words, it will make the generation of deep reflections and news articles about the artist.</p>
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Script that make the magic:</span>
+                <pre><code class="language-javascript">
+                  (async () => {
+                    try {
+                        const songToAnalyze = "Poker Face"
+                        const token = await getSpotifyToken();
+                        const song_info = await searchSpotifySong(token, songToAnalyze);
+                        console.log(song_info)
+                        const reflection = await getOpenAIReflection(song_info);
+                        console.log(reflection);
+                        console.log("\n")
+                        const artistNameForNews = await getArtistName(token, songToAnalyze)
+                        await fetchNewsArticlesAboutSong(artistNameForNews)
+                    } catch (error) {
+                        console.log('Error:', error.message);
+                    }
+                  })();
+                </code></pre>
+              </div>
+            </div>
 
             
         </div>
 
         <!-- Part 3 -->
-        <div class="section">
-            <h5>Part 3: Advanced Integration and Real-world Application</h5>
+        <div class="section card-panel light-green lighten-2 hoverable">
+            <h3>Part 3: Advanced Integration and Real-world Application</h3>
             <p>The final part will walk through a practical example that demonstrates how to integrate multiple web services to build a cohesive application. This section aims to solidify your understanding by applying the concepts in a real-world scenario.</p>
         </div>
     </div>
 
     <!-- Compiled and minified JavaScript at the end of the body for optimized loading -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- LINK TO IMPORT TH JS FILE FOR ENABLE STYLES IN BOX CODE-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
 </body>
 
 </html>
