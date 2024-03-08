@@ -1,0 +1,6 @@
+.centered-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%; /* Adjust this value to set the image size */
+}
