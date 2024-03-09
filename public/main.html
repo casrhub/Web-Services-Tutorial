@@ -54,7 +54,7 @@
         <!-- Part 1 -->
         <div class="section card-panel light-green lighten-2 hoverable">
             <h3>Part 1: Introduction to Web Services and Node.js</h3>
-            <p>This section will introduce web services and their importance in modern web development. We'll also dive into Node.js fundamentals, including its event-driven architecture and non-blocking I/O features.</p>
+            <p>This section will introduce web services and their importance in modern web development. We'll also dive into Node.js fundamentals and API explanation.</p>
             <h5><i class="tiny material-icons">chevron_right</i>What is Node.js?</h5>
             <ul>
                   <li><i class="tiny material-icons">check_circle</i>Node.js is a server environment</li>
@@ -98,16 +98,18 @@
         <!-- Part 2 -->
         <div class="section card-panel light-green lighten-2" >
             <h3>Part 2: Consuming Web Services Using Node.js</h3>
-            <p>In the second part, we'll cover how to use Node.js to make requests to web services. We'll focus on using npm packages like axios or node-fetch to interact with APIs, handle responses, and process JSON data.</p>
+            <p>In the second part, we'll cover how to use Node.js to make requests to web services. We'll focus how to use fetch  to interact 
+              with APIs, handle different responses and process JSON data. 
+            </p>
             <p>Okay then, by far you should have a notion of what is an api, what is node js and what are http methods, now its time to put this into practice</p>
             <h4>Step by step:</h4>
             <h5><i class="tiny material-icons">beenhere</i>Step 1: Intro </h5>
-            <p>In first place we need to consider or think about which API's we want to use depending in what we want to do. In this case we want to do a philosofic reflection about any song and we want to display the news articles about the artist who performed the same song. For this reason we are going to use Spotify API along Open AI API and as third use of API's we are going to use Google News API.</p>
+            <p>Firstly, we need to decide which APIs to use, based on our goals. For a project that involves philosophical analysis of songs and fetching news articles about the artists, we'll use the Spotify API for music data, OpenAI API for generating reflections, and GNews API for news articles.</p>
             <h5><i class="tiny material-icons">beenhere</i>Step 2: Intro </h5>
-            <p>Once we have determined our objectives with the APIs and identified which ones we will utilize, we can appropriately commence with the tutorial on consuming web services using Node.js.</p>
+            After identifying our API choices and objectives, we're ready to dive into consuming web services with Node.js.</p>
             <h5><i class="tiny material-icons">beenhere</i>Step 3: Generating a spotify token.  </h5>
-            <p>The first API we will start using is the spotify API. This one because in order to achieve our goals we need to have in first place the spotify token for make querys to spotify and with this get song and artits information for the philosophical reflection.</p>
-            <p>So, we can see this request of the token in the following code:</p>
+            <p>Our first task is to obtain a Spotify token, which is essential for making queries to Spotify's API for song and artist information. Below is the code to request a token:</p>
+          
             <div class="card">
               <div class="card-content">
                 <span class="card-title">Generating token script</span>
@@ -125,17 +127,28 @@
                 </code></pre>
               </div>
             </div>
-            <p>BORRAR</p>
-            <h6>POST method explication:</h6>
-            <p>This code serves as a clear illustration of using the POST method to interact with the Spotify API. Specifically, we are employing the POST method to request an access token from Spotify. This access token will enable us to execute future queries with the Spotify API.</p>
+            <h6>POST method explanation:</h6>
+
+    
+            <p>The <code>POST</code> method is used in the <code>getSpotifyToken</code> function for several reasons:</p>
+            <ul>
+                <li><strong>Submitting Data:</strong> The <code>POST</code> method is designed to submit data to a specified resource to be processed. In this case, it sends the client credentials to the Spotify API to request an access token.</li>
+                <li><strong>Security:</strong> <code>POST</code> requests submit data in the body of the request. This is more secure than a <code>GET</code> request, which appends data to the URL, because sensitive information like the client ID and client secret are not exposed in URLs that could be logged or cached.</li>
+                <li><strong>Semantic Correctness:</strong> The action of obtaining an access token alters the state on the server by creating a new token or refreshing an existing one. According to HTTP method definitions, <code>POST</code> is appropriate for operations that cause changes on the server.</li>
+                <li><strong>Accommodating Payloads:</strong> Unlike <code>GET</code> requests, which are limited in size and restricted to URL length, <code>POST</code> requests can carry a larger amount of data in the request body. This function sends a payload containing the grant type, client ID, and client secret, which are necessary for the authentication process.</li>
+            </ul>
+            <p>In summary, the <code>POST</code> method is used in this function to securely submit authentication details to the Spotify API, requesting an access token while adhering to best practices for web communication.</p>
             <h5><i class="tiny material-icons">beenhere</i>Step 4: Making our first query to spotify API.</h5>
-            <p>Once we obtain the Spotify token, we will execute two queries. The first query will return the name of the song and the artist who performed it and the second one will return only the name of the artist, this because we need this data separate for futures implementations. This data will then be utilized to enable in-depth analysis with OpenAI and for get news about the artist who performed this song.</p>
+            <p>Once we obtain the Spotify token, we will execute two queries. The first query will return the name of the song and the artist who performed it and the second one will return only the name of the artist, this is becasue we need to separate our responses for future implementations. This data will then be utilized to enable in-depth analysis with OpenAI and to get news about the artists.</p>
             <p>The code utilizing the Spotify token to execute the query can be observed in the subsequent code box:</p>
+
+
+
             <div class="card">
               <div class="card-content">
                 <span class="card-title">Spotify query script</span>
                 <pre><code class="language-javascript">
-                  //Async Function for do spotify querys about the song and artist name.
+                  //Async Function to do spotify querys about the song and artist name.
                   async function searchSpotifySong(token, songName) {
                     const requestOptions = {
                         method: 'GET',
@@ -155,7 +168,7 @@
                     throw new Error('Song not found');
                   }
 
-                  //Async Function for do spotify querys about the artist name.
+                  //Async Function to do spotify querys about the artist name.
                   async function getArtistName (token, songName) {
                     const requestOptions = {
                         method: 'GET',
@@ -176,16 +189,22 @@
                 </code></pre>
               </div>
             </div>
-            <h6>GET method explication:</h6>
-            <p>This section of code exemplifies the use of the GET method, serving as a practical example for web development applications. The GET method is employed here for two distinct purposes. Firstly, it is used to make a request to the Spotify API for the name of an artist who produce the song that the user give as input and at the same time the name of this same song. Secondly, the GET method is utilized again to request solely the name of the artist associated with a particular song.</p>
-            <h5><i class="tiny material-icons">beenhere</i>Step 5: Making our first Open AI query</h5>
-            <p>With the song name and the artist name that we got of the las step, now we can do our first query to Open AI API for achieve the purpose we mentioned before.</p>
-            <p>We can see the request of the deep reflection and the request for the news about the song in the following Async functions:</p>
+            <h6>GET method explanation:</h6>
+            <p>The GET method is used in these functions to request data from the Spotify API. Specifically, it's employed to fetch information about a song and its artist, or just the artist's name, based on the song name provided by the user. The use of the GET method here is appropriate because we are retrieving information, not sending or modifying data on the server.</p>
+
+<p>When we make a request with the GET method, we append the search query (the song name, encoded to be URL-safe) to the endpoint URL. This is followed by specifying the type of data we're looking for, which in this case is 'track', to indicate we're searching for song tracks. The authorization header, containing the Bearer token, authenticates our request to the Spotify API.</p>
+
+<p>In return, the Spotify API responds with a JSON object containing details about the tracks that match the query. This object includes a variety of information, but we're particularly interested in the 'items' array within the 'tracks' object, which lists the songs that fit the search criteria. From the first item in this array, we extract the song's name and the primary artist's name. These pieces of information are then used to log the song and artist or are returned for further processing. If no matching tracks are found, an error indicating "Song not found" is thrown, signaling that the search did not yield any results.</p>
+
+<p>This method of querying allows us to efficiently retrieve and utilize specific data from Spotify's vast library for our application's needs, such as generating insights or finding related news articles.</p>
+<h5><i class="tiny material-icons">beenhere</i>Step 5: Making our first Open AI query</h5>
+<p>With the song name and the artist name that we got of the last step, we can now do our first query to Open AI API to achieve the purpose we mentioned before. Passing the song name and artist name as paramters to the LLM call</p>
+<p>We can see the request of the deep reflection and the request for the news about the song in the following Async functions:</p>
             <div class="card">
               <div class="card-content">
-                <span class="card-title">Open AI query script</span>
+                <span class="card-title">Open AI & GNews query script</span>
                 <pre><code class="language-javascript">
-                  //Async Function for do Open AI querys about deep reflection.
+                  //Async Function to to do Open AI querys about deep reflection.
                   async function getOpenAIReflection(song_name_and_artist) {
                     const body = JSON.stringify({
                         model: 'gpt-3.5-turbo',
@@ -193,7 +212,7 @@
                     });
                     const requestOptions = {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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' },
+                        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer useyourkeyhere' },
                         body: body
                     };
                     const response = await fetch(endpoint_ai, requestOptions);
@@ -201,7 +220,7 @@
                     console.log("Philosophical Reflection generated by gpt-3.5-turbo: ")
                     return data.choices[0].message.content;
                 }
-                //Async Function for do Google News querys about news articles of the artist.
+                //Async Function to do Google News querys about news articles of the artist.
                 async function fetchNewsArticlesAboutSong(songInfoNews) {
                     const apikey = 'Put here your Open AI key';
                     const encodedSongInfo = encodeURIComponent(songInfoNews); // Ensure the song info is URL-safe
@@ -231,14 +250,22 @@
                 </code></pre>
               </div>
             </div>
-            <h6>POST method explication:</h6>
+            <h6>POST method explanation:</h6>
             <p> This section of the code provides another illustration of the POST method, this time in interaction with the OpenAI API. We employ this method to query OpenAI to perform a deep reflection based on the name of a song and its corresponding artist. The use of the POST method is crucial here as it enables us to request OpenAI to generate thoughtful insights about a specific song and artist.</p>
 
-            <h5><i class="tiny material-icons">beenhere</i>Step 6: Making an Async function for call the before functions and display the results</h5>
+            
+            
+        </div>
+
+        <!-- Part 3 -->
+        <div class="section card-panel light-green lighten-2 hoverable">
+            <h3>Part 3: Making everything work with each other </h3>
+            <p>Great!, by far we should understand what is an api how to fetch data through differnt apis and how top treat JSON reposnes, we are only missing the connections between these doots to maake the apis interact with each other</p>
+            <h5><i class="tiny material-icons">beenhere</i>Step 6: Making an Async function to call the prevoius functions and display the results</h5>
             <p>In this final step, we will execute an asynchronous function that calls all previously mentioned asynchronous functions and establishes a relationship between them. This connection will enable the 'deep reflection' and 'news articles' functions to fulfill their intended purposes. In other words, it will make the generation of deep reflections and news articles about the artist.</p>
             <div class="card">
               <div class="card-content">
-                <span class="card-title">Script that make the magic:</span>
+                <span class="card-title">Script that makes the magic happen:</span>
                 <pre><code class="language-javascript">
                   (async () => {
                     try {
@@ -255,23 +282,19 @@
                         console.log('Error:', error.message);
                     }
                   })();
-                </code></pre>
+                </code></pre>        
+
               </div>
+               
             </div>
-
-            
+            <p>We are fundamentally setting up a song for analysis, as our Node.js application currently lacks a frontend interface. Initially, the spotifyToken function is executed to obtain an authentication token. With this token, we then query Spotify to find details about the song and its artist. After acquiring the names of the song and artist, these are passed as parameters to the OpenAI function. This function is tasked with generating a philosophical analysis of the song through a specific prompt. Lastly, we use the artist's name as a parameter to fetch news articles related to the artist, thereby enriching our analysis with current information.</p>
         </div>
-
-        <!-- Part 3 -->
-        <div class="section card-panel light-green lighten-2 hoverable">
-            <h3>Part 3: Advanced Integration and Real-world Application</h3>
-            <p>The final part will walk through a practical example that demonstrates how to integrate multiple web services to build a cohesive application. This section aims to solidify your understanding by applying the concepts in a real-world scenario.</p>
-        </div>
+        <h3 class="center-align">Great You are Now a NodeJS and API ninja!!</h3>
     </div>
 
     <!-- Compiled and minified JavaScript at the end of the body for optimized loading -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- LINK TO IMPORT TH JS FILE FOR ENABLE STYLES IN BOX CODE-->
+    <!-- LINK TO IMPORT TH JS FILE TO ENABLE STYLES IN BOX CODE-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
 </body>
