@@ -130,8 +130,9 @@
             <h6>POST method explanation:</h6>
 
     
-            <p>The <code>POST</code> method is used in the <code>getSpotifyToken</code> function for several reasons:</p>
+            <p>The <code>POST</code> method is used in the <code>getSpotifyToken</code> function for several reasons including auth, dont worry if that scares you, authentication its just a way of providing a key to use a car:</p>
             <ul>
+              <li><strong>Authentication: </strong>For the Spotify API, authentication begins with acquiring an access token using the Client Credentials Flow. This process involves sending a POST request to the Spotify Accounts service endpoint with the application's client_id and client_secret. These credentials are encoded in the request's body. Upon successful authentication, Spotify returns an access token in JSON format. This token is then used in the Authorization header of subsequent API requests to access Spotify data, such as searching for songs and artists, by including it as a Bearer token.</li>
                 <li><strong>Submitting Data:</strong> The <code>POST</code> method is designed to submit data to a specified resource to be processed. In this case, it sends the client credentials to the Spotify API to request an access token.</li>
                 <li><strong>Security:</strong> <code>POST</code> requests submit data in the body of the request. This is more secure than a <code>GET</code> request, which appends data to the URL, because sensitive information like the client ID and client secret are not exposed in URLs that could be logged or cached.</li>
                 <li><strong>Semantic Correctness:</strong> The action of obtaining an access token alters the state on the server by creating a new token or refreshing an existing one. According to HTTP method definitions, <code>POST</code> is appropriate for operations that cause changes on the server.</li>
@@ -251,6 +252,8 @@
               </div>
             </div>
             <h6>POST method explanation:</h6>
+            <p>First we'll talk a bit about auth in openAI...</p>
+            <p>Authentication with the OpenAI API is straightforward, requiring an access token that must be included in the Authorization header of every API request. In this case, a pre-defined token (<code>KEY</code>) is used. This token is passed as a Bearer token within the headers of the POST request to the OpenAI API endpoint. The request body includes the data needed for the API to generate a response, such as the model to use and the content to process.</p>
             <p> This section of the code provides another illustration of the POST method, this time in interaction with the OpenAI API. We employ this method to query OpenAI to perform a deep reflection based on the name of a song and its corresponding artist. The use of the POST method is crucial here as it enables us to request OpenAI to generate thoughtful insights about a specific song and artist.</p>
 
             
@@ -288,7 +291,10 @@
                
             </div>
             <p>We are fundamentally setting up a song for analysis, as our Node.js application currently lacks a frontend interface. Initially, the spotifyToken function is executed to obtain an authentication token. With this token, we then query Spotify to find details about the song and its artist. After acquiring the names of the song and artist, these are passed as parameters to the OpenAI function. This function is tasked with generating a philosophical analysis of the song through a specific prompt. Lastly, we use the artist's name as a parameter to fetch news articles related to the artist, thereby enriching our analysis with current information.</p>
+
+            
         </div>
+
         <h3 class="center-align">Great You are Now a NodeJS and API ninja!!</h3>
     </div>
 
